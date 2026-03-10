@@ -1,0 +1,41 @@
+import pygame
+import sys
+
+pygame.init()
+
+# Screen size
+width = 600
+height = 400
+screen = pygame.display.set_mode((width, height))
+pygame.display.set_caption("Python Animation")
+
+# Ball properties
+x = 300
+y = 200
+radius = 20
+dx = 3
+dy = 3
+
+clock = pygame.time.Clock()
+
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+
+    # Move ball
+    x += dx
+    y += dy
+
+    # Bounce from walls
+    if x - radius <= 0 or x + radius >= width:
+        dx = -dx
+    if y - radius <= 0 or y + radius >= height:
+        dy = -dy
+
+    screen.fill((255, 255, 255))
+    pygame.draw.circle(screen, (255, 0, 0), (x, y), radius)
+
+    pygame.display.update()
+    clock.tick(60)
